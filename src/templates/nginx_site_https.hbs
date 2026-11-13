@@ -1,0 +1,36 @@
+server {
+    listen       {{http_port}};
+    server_name  {{server_name}};
+
+    location ^~ /.well-known/acme-challenge/ {
+        root "{{acme_root}}";
+    }
+
+    location / {
+        return 301 https://$host:{{https_port}}$request_uri;
+    }
+}
+
+server {
+    listen       {{https_port}} ssl;
+    server_name  {{server_name}};
+    root         "{{root}}";
+    index        {{index}};
+
+    access_log   "{{access_log}}" main;
+    error_log    "{{error_log}}" warn;
+
+    ssl_certificate      "{{cert_file}}";
+    ssl_certificate_key  "{{key_file}}";
+    ssl_protocols        TLSv1.2 TLSv1.3;
+    ssl_ciphers          ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384;
+    ssl_prefer_server_ciphers off;
+    ssl_session_cache    shared:SSL:10m;
+    ssl_session_timeout  10m;
+
+    location ^~ /.well-known/acme-challenge/ {
+        root "{{acme_root}}";
+    }
+
+{{{custom_locations}}}
+}

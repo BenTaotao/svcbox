@@ -1,0 +1,10 @@
+/target
+/dist
+/node_modules
+/.superpowers
+/gen
+/svcbox-portable
+*.log
+.DS_Store
+
+.openidea/

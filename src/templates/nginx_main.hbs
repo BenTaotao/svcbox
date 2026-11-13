@@ -1,0 +1,24 @@
+worker_processes  {{worker_processes}};
+error_log  "{{error_log}}" warn;
+pid        "{{pid_file}}";
+
+events {
+    worker_connections  {{worker_connections}};
+}
+
+http {
+    include       "{{mime_types}}";
+    default_type  application/octet-stream;
+
+    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent"';
+
+    access_log  "{{access_log}}" main;
+    sendfile           on;
+    keepalive_timeout  {{keepalive_timeout}};
+    gzip               {{#if gzip}}on{{else}}off{{/if}};
+    client_max_body_size {{client_max_body_size}};
+
+    include "{{sites_glob}}";
+}

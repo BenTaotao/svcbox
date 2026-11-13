@@ -1,0 +1,12 @@
+{
+  "identifier": "default",
+  "description": "svcbox 主窗口默认权限",
+  "windows": ["main"],
+  "permissions": [
+    "core:default",
+    "notification:default",
+    "autostart:allow-enable",
+    "autostart:allow-disable",
+    "autostart:allow-is-enabled"
+  ]
+}

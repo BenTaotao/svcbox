@@ -1,0 +1,32 @@
+[
+  {
+    "kind": "nginx",
+    "version": "1.30.6",
+    "platform": "windows-x64",
+    "download_url": "https://nginx.org/download/nginx-1.30.6.zip",
+    "mirror_url": null,
+    "sha256": "c6ee35edb0a861063323f709192ae50d1eefaf2ea7d00678bd2b22d8542dc61e",
+    "archive_type": "zip",
+    "bin_path": "nginx.exe"
+  },
+  {
+    "kind": "mysql",
+    "version": "8.4.13",
+    "platform": "windows-x64",
+    "download_url": "https://cdn.mysql.com//Downloads/MySQL-8.4/mysql-8.4.13-winx64.zip",
+    "mirror_url": null,
+    "sha256": "e9cd98b1d23f122987b1afca26ad942efec5891481103d48ae3cde237fa3ea54",
+    "archive_type": "zip",
+    "bin_path": "bin/mysqld.exe"
+  },
+  {
+    "kind": "redis",
+    "version": "8.10.3",
+    "platform": "windows-x64",
+    "download_url": "https://github.com/redis-windows/redis-windows/releases/download/8.10.3/Redis-8.10.3-Windows-x64-msys2.zip",
+    "mirror_url": null,
+    "sha256": "af16df340525b431e9ec8dabfd625d5e7a233f82805b5418819904ea909c447f",
+    "archive_type": "zip",
+    "bin_path": "redis-server.exe"
+  }
+]

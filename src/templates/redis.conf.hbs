@@ -1,0 +1,15 @@
+bind {{bind}}
+protected-mode yes
+port {{port}}
+timeout 0
+tcp-keepalive 300
+daemonize no
+supervised no
+pidfile "{{pid_file}}"
+loglevel notice
+logfile "{{log_file}}"
+databases 16
+always-show-logo no
+appendonly {{#if appendonly}}yes{{else}}no{{/if}}
+{{#if has_password}}requirepass "{{requirepass}}"{{/if}}
+dir "{{data_dir}}"

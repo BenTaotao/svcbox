@@ -1,0 +1,15 @@
+server {
+    listen       {{port}};
+    server_name  {{server_name}};
+    root         "{{root}}";
+    index        {{index}};
+
+    access_log   "{{access_log}}" main;
+    error_log    "{{error_log}}" warn;
+
+    location ^~ /.well-known/acme-challenge/ {
+        root "{{acme_root}}";
+    }
+
+{{{custom_locations}}}
+}

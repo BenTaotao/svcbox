@@ -1,0 +1,78 @@
+[package]
+name = "benv"
+version = "0.1.0"
+edition = "2021"
+description = "Windows 本地开发环境 Web 服务管理器（Nginx / MySQL / Redis）"
+license = "MIT"
+default-run = "svcbox"
+
+[[bin]]
+name = "svcbox"
+path = "src/main.rs"
+
+[lib]
+name = "benv"
+path = "src/lib.rs"
+
+[features]
+default = []
+# 桌面 GUI：需要 MSVC 工具链与 WebView2 运行时
+desktop = [
+    "dep:tauri",
+    "dep:tauri-plugin-notification",
+    "dep:tauri-plugin-autostart",
+]
+# 生产构建必须同时开启：把 dist 嵌入二进制，使用 tauri:// 自定义协议而不是 devUrl
+custom-protocol = ["tauri?/custom-protocol"]
+
+[dependencies]
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "fs", "process", "net", "time", "sync", "io-util", "signal"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+rusqlite = { version = "0.32", features = ["bundled"] }
+handlebars = "6"
+reqwest = { version = "0.12", default-features = false, features = ["rustls-tls", "stream", "json", "charset", "http2"] }
+sha2 = "0.10"
+hex = "0.4"
+clap = { version = "4", features = ["derive"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+tracing-appender = "0.2"
+thiserror = "2"
+chrono = { version = "0.4", features = ["serde"] }
+regex = "1"
+futures-util = "0.3"
+zip = { version = "2", default-features = false, features = ["deflate"] }
+flate2 = "1"
+tar = "0.4"
+dirs = "5"
+aes-gcm = "0.10"
+base64 = "0.22"
+getrandom = "0.3"
+x509-parser = "0.16"
+url = "2"
+axum = "0.7"
+
+[target.'cfg(unix)'.dependencies]
+libc = "0.2"
+
+[dependencies.tauri]
+version = "2"
+optional = true
+features = ["tray-icon"]
+
+[dependencies.tauri-plugin-notification]
+version = "2"
+optional = true
+
+[dependencies.tauri-plugin-autostart]
+version = "2"
+optional = true
+
+[build-dependencies]
+tauri-build = "2"
+
+[profile.release]
+opt-level = "s"
+lto = "thin"
+strip = true
